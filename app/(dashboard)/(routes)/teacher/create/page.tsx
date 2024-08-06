@@ -33,6 +33,12 @@ const CreatePage = () => {
       title: "",
     },
   });
+
+  const { isSubitting, isValid } = form.formState;
+
+  const onSudmit = (values:z.infer<typeof formSchema>) =>{
+    console.log(values);
+  }
   
 
 
