@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { Icon, LucideIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 interface SidebarItemProps {
@@ -32,9 +32,20 @@ export const SidebarItem = ({ icon, label, href }: SidebarItemProps) => {
       )}
     >
         <div className="flex items-center gap-x-2 py-4">
+            <Icon size={22} className={cn(
+                "text-slate-500",
+                isActive && "text-sky-700"
+            )} />
+            {label}
             
 
         </div>
+        <div
+        className={cn(
+            "ml-auto opacity-0 border-2 border-sky-700 h-full transition-all ",
+            isActive && "opacity-100"
+        )}
+        />
     </button>
   );
 };
