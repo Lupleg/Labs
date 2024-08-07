@@ -18,31 +18,26 @@ import {
 } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { resolve } from "path";
+
 
 const formSchema = z.object({
-  title: z.string().min(1, { 
-    message: "Title is required",
+  title: z.string().min(1,{
+    message: "Title is required"
   }),
-  
-});
+  })
 
 const CreatePage = () => {
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: "",
-    },
   });
 
-  const { isSubitting, isValid } = form.formState;
-
-  const onSudmit = (values:z.infer<typeof formSchema>) =>{
-    console.log(values);
-  }
-  
-
-
-  return <div>Create course</div>;
-};
+  return (
+    <div>
+      Create page
+    </div>
+  )
+}
 
 export default CreatePage;
