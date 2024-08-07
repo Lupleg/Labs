@@ -31,7 +31,12 @@ const CreatePage = () => {
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+    }
   });
+
+  const { isSubmitting, isValid } = form.formState;
 
   return (
     <div>
