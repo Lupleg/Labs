@@ -11,14 +11,16 @@ generator client {
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
+
 }
 
 model Course {
-  id String @id @default(uuid())
+    id String @id @default(uuid()) @map("_id")
   userId String
-  title String @db.Text
-  description String? @db.Text
-  imageUrl String? @db.Text
+  title String @db.String
+  description String? @db.String
+  imageUrl String? @db.String
   price Float?
   isPublished Boolean @default(false)
 
@@ -31,12 +33,12 @@ model Course {
 }
 
 model Attachments {
-  id String @id @default(uuid())
+  id String @id @default(uuid()) @map("_id")
   name String
   url String
 
-  course Course @relation((fields: [courseId], references: [id], onDelete: 
-  Cascade))
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@index([courseId])
 }
