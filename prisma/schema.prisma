@@ -25,8 +25,20 @@ model Course {
   isPublished Boolean @default(false)
 
   categoryId String?
+  category Category? @relation(fields: [categoryId], references: [id])
 
   attachments Attachments[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+}
+
+model Category {
+  id String @id @default(uuid()) @map("_id")
+  name String @unique
+  courses Course[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -39,6 +51,9 @@ model Attachments {
 
   courseId String
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([courseId])
 }
